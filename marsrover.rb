@@ -1,16 +1,28 @@
+class Plateau
+
+	attr_reader :x, :y
+
+	def initialize(x, y)
+		@x = x.to_i
+		@y = y.to_i
+	end
+end
+
 class Rover
 
 	attr_accessor :x, :y, :direction
+	@@counter = 0
 
-	def initialize(x, y, direction)
+	def initialize(x = 0, y = 0, direction = "N")
 		@x = x.to_i
 		@y = y.to_i
 		@direction = direction.to_s
-		puts "Rover's starting position is (#{@x}, #{@y}) and is facing #{@direction}. "
+		@@counter += 1
+		puts "Rover #{@@counter}'s starting position is (#{@x}, #{@y}) and is facing #{@direction}. "
 	end
 
-	def input_prompt
-		puts "Please enter instructions to rover. Can be M (Move 1 forward in current direction facing), \n L (turn left) or R (turn right). Can enter multiple instructions. "
+	def receive_instructions
+		puts "Instructions taken: M (Move 1 forward in current direction facing), \nL (turn left) or R (turn right). "
 		puts "Enter M, L, R or a combination (e.g. MMLRM): "
 		input = gets.chomp.to_s
 		read_instructions(input)
@@ -25,8 +37,8 @@ class Rover
 			elsif instruction == "M"
 				move(instruction)
 			else
-				puts "invalid input, please enter M, L or R to either move or turn left or right"
-				input_prompt
+				puts "invalid input, please enter M, L or R to either move or turn left/right"
+				receive_instructions
 			end
 		end
 	end
@@ -76,10 +88,21 @@ class Rover
 	end
 end
 
-rover1 = Rover.new(0, 0, "N")
-rover1.input_prompt
+class MissionControl
+
+	def initialize()
+	end
+
+end
+
+puts "Please enter plateau size."
+print "First enter x coordinate, press enter and then enter y coordinate: "
+$plateau = Plateau.new(gets.chomp.to_i, gets.chomp.to_i)
+
+rover1 = Rover.new
+rover1.receive_instructions
 rover1.rover_status
 
-rover2 = Rover.new(0, 0, "S")
-rover2.input_prompt
+rover2 = Rover.new
+rover2.receive_instructions
 rover2.rover_status
