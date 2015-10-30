@@ -8,8 +8,9 @@ class Cart
 		@total = 0
 	end
 
-	def add_contents(contents)
-		@contents << contents
+#one way of feading the array of params to @contents
+	def add_contents(*contents)
+		contents.each { |item| @contents << item }
 	end
 
 	def receipt
@@ -79,10 +80,7 @@ chocolate_bar.tax
 
 
 cart1 = Cart.new
-cart1.add_contents(book)
-cart1.add_contents(music_cd)
-cart1.add_contents(chocolate_bar)
-
+cart1.add_contents(book, music_cd, chocolate_bar)
 cart1.receipt
 
 
@@ -95,9 +93,7 @@ imp_chocs.importtax
 imp_perf.tax
 imp_perf.importtax
 
-cart2.add_contents(imp_chocs)
-cart2.add_contents(imp_perf)
-
+cart2.add_contents(imp_chocs, imp_perf)
 cart2.receipt
 
 cart3 = Cart.new
@@ -113,9 +109,5 @@ pills.tax
 imp_chocs_two.tax
 imp_chocs_two.importtax
 
-cart3.add_contents(imp_perf_two)
-cart3.add_contents(perfume)
-cart3.add_contents(pills)
-cart3.add_contents(imp_chocs_two)
-
+cart3.add_contents(imp_perf_two, perfume, pills, imp_chocs_two)
 cart3.receipt

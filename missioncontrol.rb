@@ -12,24 +12,24 @@ class MissionControl
 		Rover.create
 	end
 
-	def self.receive_instructions(rover)
+	def receive_instructions
 		puts "Instructions taken: M (Move 1 forward in current direction), \nL (turn left) or R (turn right). "
 		puts "Enter M, L, R or a combination (e.g. MMLRM): "
 		input = gets.chomp.to_s
-		read_instructions(input, rover)
+		read_instructions(input)
 	end
 
-	def read_instructions(input, rover)
+	def read_instructions(input)
 		instructions = input.split("")
 		print "#{instructions} "
 		instructions.each do |instruction|
 			if instruction == "L" || instruction == "R"
-				rover.turn(instruction)
+				turn(instruction)
 			elsif instruction == "M"
-				rover.move(instruction)
+				move(instruction)
 			else
 				puts "invalid input, please enter M, L or R to either move or turn left/right"
-				MissionControl.receive_instructions(rover)
+				receive_instructions
 			end
 		end
 	end
