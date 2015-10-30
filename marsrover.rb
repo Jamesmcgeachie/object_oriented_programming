@@ -22,7 +22,7 @@ class Rover
 	end
 
 	def receive_instructions
-		puts "Instructions taken: M (Move 1 forward in current direction facing), \nL (turn left) or R (turn right). "
+		puts "Instructions taken: M (Move 1 forward in current direction), \nL (turn left) or R (turn right). "
 		puts "Enter M, L, R or a combination (e.g. MMLRM): "
 		input = gets.chomp.to_s
 		read_instructions(input)
@@ -30,7 +30,7 @@ class Rover
 
 	def read_instructions(input)
 		instructions = input.split("")
-		print "#{instructions} :"
+		print "#{instructions} "
 		instructions.each do |instruction|
 			if instruction == "L" || instruction == "R"
 				turn(instruction)
@@ -97,7 +97,7 @@ end
 
 puts "Please enter plateau size."
 print "First enter x coordinate, press enter and then enter y coordinate: "
-$plateau = Plateau.new(gets.chomp.to_i, gets.chomp.to_i)
+plateau = Plateau.new(gets.chomp.to_i, gets.chomp.to_i)
 
 rover1 = Rover.new
 rover1.receive_instructions
